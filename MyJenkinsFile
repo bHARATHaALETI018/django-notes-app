@@ -12,16 +12,25 @@ pipeline{
     stage('Build'){
       steps{
         echo "building the code"
-        echo " . . . . . . . .. . . . .. . ..  ."
+        sh 'whoami'
+        sh 'docker build -t django-notes-app:latest .'
         echo "code built successfully"
       }
     }
     stage('Test'){
-      steps{
-        echo "testing the code"
-        echo " . . . . . . . .. . . . .. . ..  ."
+      steps{´
+        echo "testing the build"
+        sh 'docker run -d -p 8000:8000 --name django-notes-app-test django-notes-app:latest'
         echo "code tested successfully"
       }
     }  
   }
+  post {
+        success {
+            echo "✅ Pipeline completed successfully!"
+        }
+        failure {
+            echo "❌ Pipeline failed."
+        }
+    }
 }
