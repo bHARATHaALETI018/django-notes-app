@@ -1,0 +1,25 @@
+pipeline{
+  agent any
+  stages{
+    steps("Code Clone"){
+      echo "code cloning . . ."
+      git url:'', branch: 'main'
+      echo "git cloning done!"
+    }
+  }
+  stages('Build'){
+    steps{
+      echo "Building code . . .!"
+    }
+  }
+stages('Test'){
+    steps{
+      echo "Testing code . . .!"
+    }
+  }
+stages('Deploy'){
+    steps{
+      echo "Deploying code . . .!"
+    }
+  }
+}
