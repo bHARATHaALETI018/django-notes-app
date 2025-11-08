@@ -28,6 +28,8 @@ pipeline{
       steps{
         echo "deploying the build"
         sh 'whoami'
+        sh 'which docker'
+        sh 'which docker-compose'
         sh 'docker compose down . && docker compose up -d .'
         sh 'docker ps'
         sh 'sleep 180'
