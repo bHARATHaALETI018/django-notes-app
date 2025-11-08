@@ -1,25 +1,26 @@
 pipeline{
   agent any
   stages{
-    steps("Code Clone"){
-      echo "code cloning . . ."
-      git url:'', branch: 'main'
-      echo "git cloning done!"
+    stage('Code Clone'){
+      steps{
+        echo "cloning code from repository"
+        git branch: 'main', url: 'https://github.com/bHARATHaALETI018/django-notes-app.git'
+        echo "code cloned successfully"
+      }
     }
-  }
-  stages('Build'){
-    steps{
-      echo "Building code . . .!"
+    stage('Build'){
+      steps{
+        echo "building the code"
+        echo " . . . . . . . .. . . . .. . ..  ."
+        echo "code built successfully"
+      }
     }
-  }
-stages('Test'){
-    steps{
-      echo "Testing code . . .!"
-    }
-  }
-stages('Deploy'){
-    steps{
-      echo "Deploying code . . .!"
-    }
+    stage('Test'){
+      steps{
+        echo "testing the code"
+        echo " . . . . . . . .. . . . .. . ..  ."
+        echo "code tested successfully"
+      }
+    }  
   }
 }
