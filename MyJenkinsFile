@@ -5,6 +5,7 @@ pipeline{
       steps{
         echo "cloning code from repository"
         git branch: 'main', url: 'https://github.com/bHARATHaALETI018/django-notes-app.git'
+        sh 'pwd && ls -lart'
         echo "code cloned successfully"
       }
     }
