@@ -9,21 +9,33 @@ pipeline{
         echo "code cloned successfully"
       }
     }
-    stage('Build'){
+    // stage('Build'){
+    //   steps{
+    //     echo "building the code"
+    //     sh 'whoami'
+    //     sh 'docker build -t django-notes-app:latest .'
+    //     echo "code built successfully"
+    //   }
+    // }
+    // stage('Test'){
+    //   steps{
+    //     echo "testing the build"
+    //     sh 'docker run -d -p 8000:8000 --name django-notes-app-test django-notes-app:latest'
+    //     echo "code tested successfully"
+    //   }
+    // }  
+    stage('Deploy'){
       steps{
-        echo "building the code"
+        echo "deploying the build"
         sh 'whoami'
-        sh 'docker build -t django-notes-app:latest .'
-        echo "code built successfully"
+        sh 'docker compose down . && docker compose up -d .'
+        sh 'docker ps'
+        sh 'sleep 180'
+        sh 'docker compose down . '
+        sh 'docker ps && docker ps -a'
+        echo "code deployed successfully"
       }
     }
-    stage('Test'){
-      steps{´
-        echo "testing the build"
-        sh 'docker run -d -p 8000:8000 --name django-notes-app-test django-notes-app:latest'
-        echo "code tested successfully"
-      }
-    }  
   }
   post {
         success {
